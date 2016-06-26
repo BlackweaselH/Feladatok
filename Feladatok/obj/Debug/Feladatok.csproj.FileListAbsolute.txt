@@ -1,0 +1,6 @@
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\bin\Debug\Feladatok.exe.config
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\bin\Debug\Feladatok.exe
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\bin\Debug\Feladatok.pdb
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\obj\Debug\Feladatok.csprojResolveAssemblyReference.cache
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\obj\Debug\Feladatok.exe
+c:\users\black\documents\visual studio 2015\Projects\Feladatok\Feladatok\obj\Debug\Feladatok.pdb
