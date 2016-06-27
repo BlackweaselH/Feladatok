@@ -1,0 +1,82 @@
+  class Program
+    {
+        public static bool GetEquals(string word, string input)
+        {
+            if (word == input) return true;
+            if (word.Length != input.Length) return false;
+
+            char[] inputCharArray = input.ToCharArray();
+            char[] wordCharArray = word.ToCharArray();
+            List<int> localCount = new List<int>();
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (inputCharArray[i] == wordCharArray[i])
+                {
+                    localCount.Add(i + 1);
+                }
+            }
+            List<char> localChars = inputCharArray.Where(word.Contains).Distinct().ToList();
+            string local = localChars.Aggregate<char, string>(null, (current, i) => current + (i ));
+            string intlocal = localCount.Aggregate<int, string>(null, (current, i) => current + (i + ", "));
+            WriteLine(local.Length + "\tbetűt tartalmaza\t" + intlocal + "\tpoziciók helyesek");
+            return false;
+        }
+
+
+        //public static bool GetEqualsMachine(string position, bool correct)
+        //{
+        //    if (correct) return true;
+
+        //    string generate = GetRandomString(new[] {'A', 'B', 'C', 'D', 'E', 'F'});
+        //    char[] local =new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
+        //    Random rnd =new Random();
+        //    Console.WriteLine(generate);
+        //    string regenerated = null;
+        //    List<int> localInts = position.ToCharArray().Select(i => (int)i).ToList();
+        //    char[] generateCharArray = generate.ToCharArray();
+        //    string valami = null;
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        if (position[i] != 0)
+        //        {
+        //            regenerated += generate[i];
+        //        }
+        //        else
+        //        {
+        //            regenerated += local[rnd.Next(0, local.Length)];
+        //        }
+        //    }
+        //    Console.WriteLine(regenerated);
+        //}
+
+        public static string GetRandomString(char[] localChar)
+        {
+            Random rnd = new Random();
+        
+            string local = null;
+            for (int i = 0; i < 4; i++)
+            {
+                local += localChar[rnd.Next(0, localChar.Length)];
+            }
+            return local;
+
+        }
+
+        static void Main(string[] args)
+        {
+            var generatestring = GetRandomString(new[] {'A', 'B', 'C', 'D', 'E', 'F'});
+            WriteLine(generatestring);
+            bool mainbool = false;
+            while (!mainbool)
+            {
+                var readLine = Console.ReadLine();
+                if (readLine != null && GetEquals(generatestring, readLine.ToUpper()))
+                    mainbool = true;
+            }
+            WriteLine("Correct!");
+
+            ReadKey();
+        }
+    }
+}
