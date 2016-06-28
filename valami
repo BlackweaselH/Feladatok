@@ -1,4 +1,17 @@
-  class Program
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace MesterLogika
+{
+    class Program
     {
         public static bool GetEquals(string word, string input)
         {
@@ -23,32 +36,86 @@
             return false;
         }
 
+        public static List<char> LettList = new List<char>();
+        public static List<int>  PositionInts = new List<int>();
+        public static string Second = null;
+        public static int Count = 0;
+        public static bool GetEqualsMachine()
+        {       
+            LettList.Add('O');
+            string Start = null;
+            Random rnd =new Random();
+            bool contain = true;
+            while (contain)
+            {
+                Start =
+                    GetAll()[rnd.Next(GetAll().Count)];
+                foreach (var i in LettList)
+                {
+                    if (!Start.Contains(i))
+                    {
+                        contain = true;
+                    }
+                }
+                contain = false;
+            }         
+            WriteLine(Start);
 
-        //public static bool GetEqualsMachine(string position, bool correct)
-        //{
-        //    if (correct) return true;
+            int inputletterscountStart = 0;
+            int inputletterscountSecond = 0;
+            string inputPositionStart = null;
+            string inputPositionSecond = null;
+            if (Count%2 == 0)
+            {
+                inputletterscountStart = int.Parse(ReadLine());
+                inputPositionStart = ReadLine();
+            }
+            else
+            {
+                inputletterscountSecond = int.Parse(ReadLine());
+                inputPositionSecond = ReadLine();
+            }
+            Count++;
 
-        //    string generate = GetRandomString(new[] {'A', 'B', 'C', 'D', 'E', 'F'});
-        //    char[] local =new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
-        //    Random rnd =new Random();
-        //    Console.WriteLine(generate);
-        //    string regenerated = null;
-        //    List<int> localInts = position.ToCharArray().Select(i => (int)i).ToList();
-        //    char[] generateCharArray = generate.ToCharArray();
-        //    string valami = null;
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        if (position[i] != 0)
-        //        {
-        //            regenerated += generate[i];
-        //        }
-        //        else
-        //        {
-        //            regenerated += local[rnd.Next(0, local.Length)];
-        //        }
-        //    }
-        //    Console.WriteLine(regenerated);
-        //}
+            bool result = Boolean.Parse(ReadLine());
+            if(result == true) return true;
+            int max = 0;
+            if (inputletterscountSecond != 0 && inputletterscountStart != 0)
+            {
+                max = max < inputletterscountSecond ? inputletterscountSecond : inputletterscountStart;
+                foreach (var i in Second.Where(i => Start.Contains(i)))
+                {
+                    LettList.Add(i);
+                }
+            }
+            Second = Start;
+            return false;
+        }
+
+        public static List<string> GetAll()
+        {
+            char[] localChar = new[] {'A', 'B', 'C', 'D', 'E', 'F'};
+            List<string> all = new List<string>();
+            string valami = null;
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    for (int k = 0; k < 6; k++)
+                    {
+                        for (int l = 0; l < 6; l++)
+                        {
+                            valami =
+                                string.Format(localChar[i].ToString() + localChar[j].ToString() +
+                                              localChar[k].ToString() + localChar[l].ToString());
+                            all.Add(valami);
+                        }
+                    }
+                }
+            }
+            return all;
+            
+        }
 
         public static string GetRandomString(char[] localChar)
         {
@@ -65,16 +132,24 @@
 
         static void Main(string[] args)
         {
-            var generatestring = GetRandomString(new[] {'A', 'B', 'C', 'D', 'E', 'F'});
-            WriteLine(generatestring);
             bool mainbool = false;
             while (!mainbool)
             {
-                var readLine = Console.ReadLine();
-                if (readLine != null && GetEquals(generatestring, readLine.ToUpper()))
+                if (GetEqualsMachine())
+                {
                     mainbool = true;
+                }
             }
-            WriteLine("Correct!");
+            //var generatestring = GetRandomString(new[] {'A', 'B', 'C', 'D', 'E', 'F'});
+            //WriteLine(generatestring);
+            //bool mainbool = false;
+            //while (!mainbool)
+            //{
+            //    var readLine = Console.ReadLine();
+            //    if (readLine != null && GetEquals(generatestring, readLine.ToUpper()))
+            //        mainbool = true;
+            //}
+            //WriteLine("Correct!");
 
             ReadKey();
         }
